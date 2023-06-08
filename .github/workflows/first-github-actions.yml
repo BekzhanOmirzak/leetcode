@@ -6,29 +6,22 @@ on:
       - master
 
 jobs:
-  check-bats-version:
+  create-file:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install bats
-        run: npm install -g bats
-      - name: Check bats version
-        run: bats -v
-      - name: Use Secret
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create and Write to File
         env:
-          FIRST_KEY: ${{secrets.FIRST_KEY}}
+          ENV_VALUE: ${{ secrets.ENV_VALUE }}
         run: |
-          echo "Writing to the file"
-          echo "Key : $FIRST_KEY" -> my-file.txt
-          cat my-file.txt
-      - name: "Display File Contens"
-        run: |
-          echo "Contents  of my-file.txt"
+          echo "Writing value to file..."
+          echo "Key: $ENV_VALUE" > my-file.txt
           cat my-file.txt
 
-
-
+      - name: Display File Contents
+        run: |
+          echo "Contents of my-file.txt:"
+          echo "::set-output name=file-contents::$(cat my-file.txt)"

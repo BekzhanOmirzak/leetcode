@@ -21,5 +21,7 @@ jobs:
       - name: Use Secret
         env:
           FIRST_KEY: ${{ secrets.FIRST_KEY }}
+          SECOND_KEY: ${{ secrets.SECOND_KEY }}
         run: |
           echo "The secret key value is $FIRST_KEY"
+          echo "The second key value is $SECOND_KEY"

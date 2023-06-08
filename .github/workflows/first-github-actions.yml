@@ -1,7 +1,9 @@
 name: learn-github-actions
 
 on:
-  push:
+  merge:
+    branches:
+      - main
 
 jobs:
   check-bats-version:
@@ -16,3 +18,4 @@ jobs:
         run: npm install -g bats
       - name: Check bats version
         run: bats -v
+

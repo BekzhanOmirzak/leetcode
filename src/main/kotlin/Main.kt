@@ -134,8 +134,6 @@ fun main() {
         )
     )
 
-
-
     println(
         shortestCommonSupersequence(
             "abac",

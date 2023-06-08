@@ -20,11 +20,15 @@ jobs:
         run: bats -v
       - name: Use Secret
         env:
-          FIRST_KEY: ${{ secrets.FIRST_KEY }}
-          SECOND_KEY: ${{ secrets.SECOND_KEY }}
+          FIRST_KEY: ${{secrets.FIRST_KEY}}
         run: |
-          echo "The secret key value is $FIRST_KEY"
-          echo "The second key value is $SECOND_KEY"
+          echo "Writing to the file"
+          echo "Key : $FIRST_KEY" -> my-file.txt
+          cat my-file.txt
+      - name: "Display File Contens"
+        run: |
+          echo "Contents  of my-file.txt"
+          cat my-file.txt
 
 
 

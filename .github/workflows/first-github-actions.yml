@@ -3,7 +3,7 @@ name: learn-github-actions
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   create-file:
@@ -19,13 +19,13 @@ jobs:
         run: |
           echo "Writing value to file..."
           echo "Key: $ENV_VALUE" > my-file.txt
-          cat my-file.txt
 
       - name: Display File Contents
+        id: display-contents
         run: |
           echo "Contents of my-file.txt:"
-          echo "::set-output name=file-contents::$(cat my-file.txt)"
+          cat my-file.txt
 
-
-
-
+      - name: Use File Contents
+        run: |
+          echo "File Contents: ${{ steps.display-contents.outputs.file-contents }}"
